@@ -1,6 +1,3 @@
-from sklearn.preprocessing import StandardScaler
-
-
 class Scaler(object):
     def __init__(self):
         self.measures = {
@@ -28,13 +25,19 @@ class Scaler(object):
                      exclude_categories=True,
                      value_cols=[]):
         if exclude_categories and len(value_cols) > 0:
-            _df = df.loc[:, value_cols]
-            mean = self._mean or _df.mean()
-            std = self._std or _df.std()
-            _df = (_df - mean) / std
+            df_ = df.loc[:, value_cols]
+        else:
+            df_ = df
+            value_cols = list(df_)
 
-            self.measures['mean'] = mean
-            self.measures['std'] = std
-            df.loc[:, value_cols] = _df
+        mean = self._mean or df_.mean()
+        std = self._std or df_.std()
+
+        # TODO: if df['col'].std() == 0
+        df_ = (df_ - mean) / std
+
+        self.measures['mean'] = mean
+        self.measures['std'] = std
+        df.loc[:, value_cols] = df_
 
         return df
