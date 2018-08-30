@@ -145,7 +145,7 @@ class Factory(object):
         if out_dir is None:
             raise ValueError('`out_dir` must be specified to save the model.')
 
-        path = out_dir.split('/')[:-1]
+        path = out_dir.split('/')
         if len(path) > 0:
             os.makedirs(out_dir, exist_ok=True)
 
