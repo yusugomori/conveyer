@@ -21,6 +21,12 @@ def convey(path,
     if out_dir is not None:
         factory.save(out_dir=out_dir)
 
+    if test_path is not None:
+        preds = produce(test_path,
+                        model_dir=out_dir,
+                        header=header)
+        return preds
+
 
 def produce(test_path,
             model_dir=None,
