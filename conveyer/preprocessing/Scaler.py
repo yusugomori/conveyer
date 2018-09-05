@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Scaler(object):
     def __init__(self):
         self.measures = {
@@ -32,9 +35,8 @@ class Scaler(object):
 
         mean = self._mean or df_.mean()
         std = self._std or df_.std()
-
-        # TODO: if df['col'].std() == 0
-        df_ = (df_ - mean) / std
+        eps = 1e-8
+        df_ = (df_ - mean) / np.sqrt(std**2 + eps)
 
         self.measures['mean'] = mean
         self.measures['std'] = std
