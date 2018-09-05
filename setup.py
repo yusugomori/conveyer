@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name='conveyer',
-    version='0.0.4',
+    version='0.0.5',
     description='Automated machine learning library',
     author='Yusuke Sugomori',
     author_email='me@yusugomori.com',
