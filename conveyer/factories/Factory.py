@@ -50,7 +50,7 @@ class Factory(object):
     def fit(self,
             path,
             target_name=None,
-            id_cols=[],
+            ignore_cols=[],
             models=[],
             metrics=[],
             csv_header='infer',
@@ -69,7 +69,7 @@ class Factory(object):
             self._base_df = self.parser.reindex(self._base_df,
                                                 target_name)
         X, y = self.parser.parse(self._base_df,
-                                 id_cols=id_cols,
+                                 ignore_cols=ignore_cols,
                                  ttype=ttype,
                                  replace_strategy=replace_strategy,
                                  categorical_thres=10)
@@ -82,7 +82,7 @@ class Factory(object):
         self.replace_strategy = self.parser.replace_strategy
         self.categorical_cols = self.parser.categorical_cols
         self.value_cols = self.parser.value_cols
-        self.id_cols = id_cols
+        self.ignore_cols = ignore_cols
 
         self.data_X = X
         self.data_y = y
@@ -115,7 +115,7 @@ class Factory(object):
     def format(self, test_path, csv_header='infer'):
         df = self._read_csv(path=test_path, header=csv_header)
         X, _ = self.parser.parse(df,
-                                 id_cols=self.id_cols,
+                                 ignore_cols=self.ignore_cols,
                                  include_target=False,
                                  replace_values=self._X_fill,
                                  categorical_cols=self.categorical_cols,
@@ -180,10 +180,10 @@ class Factory(object):
         with open(path, 'wb') as f:
             pickle.dump(self.value_cols, f)
 
-        # save id_cols
+        # save ignore_cols
         path = os.path.join(out_dir, self.IDS_PATH)
         with open(path, 'wb') as f:
-            pickle.dump(self.id_cols, f)
+            pickle.dump(self.ignore_cols, f)
 
         # save scaler
         path = os.path.join(out_dir, self.SCALER_PATH)
@@ -222,10 +222,10 @@ class Factory(object):
         with open(path, 'rb') as f:
             self.value_cols = pickle.load(f)
 
-        # load id_cols
+        # load ignore_cols
         path = os.path.join(out_dir, self.IDS_PATH)
         with open(path, 'rb') as f:
-            self.id_cols = pickle.load(f)
+            self.ignore_cols = pickle.load(f)
 
         # load scaler
         path = os.path.join(out_dir, self.SCALER_PATH)

@@ -35,7 +35,7 @@ class Parser(object):
         return df
 
     def parse(self, df,
-              id_cols=[],
+              ignore_cols=[],
               ttype='infer',
               categorical_thres=10,
               replace_strategy='median',
@@ -51,8 +51,8 @@ class Parser(object):
         self.categorical_cols = categorical_cols
         self.value_cols = value_cols
 
-        if len(id_cols) > 0:
-            df = self.drop_id_cols(df, id_cols)
+        if len(ignore_cols) > 0:
+            df = self.drop_ignore_cols(df, ignore_cols)
 
         X = self.parse_data(df,
                             nan_to_category=False,
@@ -67,9 +67,9 @@ class Parser(object):
 
         return (X, y)
 
-    def drop_id_cols(self, df, id_cols):
-        dtype = type(id_cols[0])  # infer type of id_cols
-        cols = df.columns[id_cols] if dtype is int else id_cols
+    def drop_ignore_cols(self, df, ignore_cols):
+        dtype = type(ignore_cols[0])  # infer type of ignore_cols
+        cols = df.columns[ignore_cols] if dtype is int else ignore_cols
         df.drop(cols, axis='columns', inplace=True)
         return df
 

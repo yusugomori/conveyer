@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     # training and validation
     conveyer.convey(path=f_train,
-                    id_cols=['PassengerId', 'Name'],
+                    ignore_cols=['PassengerId', 'Name'],
                     out_dir='model',
                     target_name='Survived')
 

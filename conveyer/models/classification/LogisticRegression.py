@@ -12,7 +12,8 @@ class LogisticRegression(ClassificationModel):
         self.param_space = {
             'penalty':      hp.choice('penalty', ['l1', 'l2']),
             'C':            hp.loguniform('C', np.log(1), np.log(100)),
-            'random_state': hp.choice('random_state', [0])
+            'random_state': hp.choice('random_state', [0]),
+            'solver':       hp.choice('solver', ['liblinear'])
         }
 
     def __repr__(self):

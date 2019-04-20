@@ -5,7 +5,7 @@ from .factories import Factory
 def convey(path,
            test_path=None,
            target_name=None,
-           id_cols=[],
+           ignore_cols=[],
            header='infer',
            out_dir=None):
     '''
@@ -15,7 +15,7 @@ def convey(path,
     factory = Factory()
     factory.fit(path,
                 target_name=target_name,
-                id_cols=id_cols,
+                ignore_cols=ignore_cols,
                 csv_header=header)
 
     if out_dir is not None:

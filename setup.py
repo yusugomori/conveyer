@@ -3,15 +3,15 @@ from setuptools import find_packages
 
 setup(
     name='conveyer',
-    version='0.0.5',
+    version='0.1.0',
     description='Automated machine learning library',
     author='Yusuke Sugomori',
     author_email='me@yusugomori.com',
     url='https://github.com/yusugomori/conveyer',
     download_url='',
     install_requires=['hyperopt>=0.1',
-                      'networkx==1.11',
-                      'numpy==1.13.3',
+                      'networkx>=1.11',
+                      'numpy>=1.13.3',
                       'pandas>=0.21.0',
                       'scikit-learn>=0.19.1',
                       'xgboost>=0.7'],

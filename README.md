@@ -15,7 +15,7 @@ f_test = os.path.join(data_dir, 'test.csv')
 
 # training and validation
 conveyer.convey(path=f_train,
-                id_cols=['Id', 'Name'],
+                ignore_cols=['Id', 'Name'],
                 out_dir='model')
 
 # test
